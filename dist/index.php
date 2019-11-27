@@ -6,7 +6,12 @@
     <title>Hello, world!</title>
   </head>
 <body>
-    <h1>My first Bootstrap - Webpack App!</h1>
+  <?= "qwe" ?>
+    <h1>My first Bootstrap -  App!</h1>
+
+    <div id="lightgallery" class="row grid">
+    </div>
+
     <!-- Bundled File -->
     <script src="./bundle.js"></script>
   </body>

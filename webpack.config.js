@@ -1,7 +1,8 @@
+const webpack = require("webpack");
 const path = require('path');
 
 module.exports = {
-  'mode': 'production',
+  'mode': 'development',
   entry: './src/app.js',
   output: {
     filename: 'bundle.js',
@@ -36,7 +37,29 @@ module.exports = {
             loader: 'sass-loader'
           }
         ]
+      },
+      {
+        test: /\.(woff|woff2|ttf|eot|gif|png|svg)$/,
+        use: [
+          {
+            loader: 'url-loader'
+          }
+        ]
       }
     ]
-  }
+  },
+  resolve: {
+    extensions: [".js"],
+    modules: ["node_modules"],
+    alias: {
+      jquery: "jquery/src/jquery.js",
+    }
+  },
+  plugins: [
+    new webpack.ProvidePlugin({
+      jQuery: "jquery",
+      $: "jquery",
+      jquery: "jquery"
+    })
+  ]
 };

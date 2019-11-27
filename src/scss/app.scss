@@ -1,4 +1,10 @@
-@import "~bootstrap/scss/bootstrap";
+@import "~bootstrap";
+
+//$lg-path-images: "~lightgallery.js/src/img";
+//$lg-path-fonts: "~lightgallery.js/src/fonts";
+@import "~lightgallery/dist/css/lightgallery.min.css";
+
+@import "./lightgallery";
 
 $body-color: red;
 
