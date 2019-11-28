@@ -2,7 +2,9 @@ require('bootstrap');
 require('masonry-layout/dist/masonry.pkgd.min');
 require('lightgallery');
 require('lg-zoom');
-require('lg-thumbnail');
+require('lg-video');
+require('lg-fullscreen');
+require('lg-hash');
 const eva = require('eva-icons');
 
 import './discord-data'
@@ -10,10 +12,13 @@ import './scss/app.scss';
 
 $(document).ready(function() {
   $("#lightgallery").lightGallery({
-    "selector": ".grid-item"
-  });
+    "selector": ".grid-item",
+    "counter": false,
 
-  eva.replace();
+    "controls": false,
+    "enableDrag": false,
+    "enableSwipe": false
+  });
 
   /*$('.grid').masonry({
     // set itemSelector so .grid-sizer is not used in layout
