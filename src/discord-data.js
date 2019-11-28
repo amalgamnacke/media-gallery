@@ -27,6 +27,7 @@ for (var messageId of Object.keys(discordJson)) {
     $(`
       <a href="${attachment["url"]}" class="grid-item">
         <img src="${attachment["url"]}"></img>
+        <i class="fas fa-search">
       </a>
     `).appendTo(container);
 

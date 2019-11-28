@@ -3,13 +3,17 @@ require('masonry-layout/dist/masonry.pkgd.min');
 require('lightgallery');
 require('lg-zoom');
 require('lg-thumbnail');
+const eva = require('eva-icons');
 
 import './discord-data'
 import './scss/app.scss';
 
 $(document).ready(function() {
   $("#lightgallery").lightGallery({
+    "selector": ".grid-item"
   });
+
+  eva.replace();
 
   /*$('.grid').masonry({
     // set itemSelector so .grid-sizer is not used in layout

@@ -6,13 +6,12 @@
     <title>Hello, world!</title>
   </head>
 <body>
-  <?= "qwe" ?>
-    <h1>My first Bootstrap -  App!</h1>
-
-    <div id="lightgallery" class="row grid">
+    <div class="container-fluid">
+      <div id="lightgallery" class="row grid"></div>
     </div>
 
     <!-- Bundled File -->
     <script src="./bundle.js"></script>
+    <script src="https://kit.fontawesome.com/99b83359a8.js" crossorigin="anonymous"></script>
   </body>
 </html>
