@@ -24,7 +24,7 @@ for (var messageId of Object.keys(discordJson)) {
     var url = urls[i];
 
     $(`
-      <a title="" href="${url.url}" class="grid-item" data-jump_url="${message["jump_url"]}">
+      <a title="" href="${url.url}" class="grid-item" data-jump_url="${message["jump_url"]}" loading="lazy">
         <img src="${url.img}" alt=""></img>
 
         <div class="info">
