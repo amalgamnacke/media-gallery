@@ -20,6 +20,9 @@
   "dependencies": {
     "bootstrap": "^4.3.1",
     "eva-icons": "^1.1.2",
+    "imagesloaded": "^4.1.4",
+    "isotope-layout": "^3.0.6",
+    "isotope-packery": "^2.0.1",
     "jquery": "^3.4.1",
     "lg-autoplay": "^1.0.4",
     "lg-fullscreen": "^1.1.0",
@@ -31,6 +34,7 @@
     "lg-zoom": "^1.1.0",
     "lightgallery": "^1.6.12",
     "masonry-layout": "^4.2.2",
+    "packery": "^2.1.2",
     "popper.js": "^1.16.0"
   },
   "devDependencies": {
