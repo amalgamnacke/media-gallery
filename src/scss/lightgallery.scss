@@ -5,11 +5,19 @@ body {
   background-color: #2d2d2d;
 }
 
-#lightgallery {
+.grid {
   padding: 10px;
+  width: 100%;
+  height: 100%;
 
+  .grid-item.not-loaded {
+    display: none;
+  }
   .grid-item {
-    width: calc(25% - 10px);
+    display: inline-block;
+    width: calc(25% - 13px);
+    float: left;
+    margin-bottom: 10px;
 
     min-height: 24px;
 
@@ -81,11 +89,12 @@ body {
       transition: transform 0.15s ease 0s;
       -webkit-transform: scale3d(1, 1, 1);
       transform: scale3d(1, 1, 1);
+
+      will-change: transform;
     }
 
     &:hover {
       .fas {
-        //display: block;
         opacity: 1;
         z-index: 100;
       }
@@ -93,7 +102,6 @@ body {
       img {
         -webkit-transform: scale3d(1.1, 1.1, 1.1);
         transform: scale3d(1.1, 1.1, 1.1);
-        filter: brightness(70%);
       }
 
       .author, .date {

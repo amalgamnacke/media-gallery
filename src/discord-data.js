@@ -1,12 +1,28 @@
 import discordJson from './db.json';
-const packery = require('packery');
 
-function renderMedia(containerSelector, amount, offset) {
+let config = {
+  rootMargin: '400px',
+  threshold: 0.0
+}
+let observer = new IntersectionObserver(function(entries, self) {
+  entries.forEach(entry => {
+    if(entry.isIntersecting) {
+      $(entry.target).css("visibility", "");
+    } else {
+      $(entry.target).css("visibility", "hidden");
+    }
+  });
+}, config);
+
+
+function renderMedia(containerSelector, amount, offset, isInitialCall = true) {
   var renderedImageCount = 0;
+  var container = $(containerSelector);
+  var gridItems = [];
 
   for (var messageId of Object.keys(discordJson).slice(offset)) {
     if (renderedImageCount >= amount) {
-      return;
+      break;
     }
 
     var message = discordJson[messageId];
@@ -19,11 +35,12 @@ function renderMedia(containerSelector, amount, offset) {
 
     for (var i = 0; i < urls.length; i++) {
       if (renderedImageCount >= amount) {
-        return;
+        break;
       }
 
       var url = urls[i];
-      var gridItem = $(`<a title="" href="${url.url}" class="grid-item " data-jump_url="${message["jump_url"]}">
+
+      var gridItem = $(`<a title="" href="${url.url}" class="grid-item not-loaded" data-jump_url="${message["jump_url"]}">
           <img src="${url.img}" alt=""></img>
 
           <div class="info">
@@ -35,15 +52,38 @@ function renderMedia(containerSelector, amount, offset) {
           <i class="fas fa-search">
         </a>
       `);
-
-      $(".grid").packery().append(gridItem).packery("appended", gridItem).packery();
+      gridItems.push(gridItem);
 
       renderedImageCount++;
     }
+
+    container.append(gridItems)
   }
+
+  if (isInitialCall) {
+    $(".grid .not-loaded").removeClass("not-loaded");
+  }
+
+  if (!isInitialCall) {
+    $(gridItems).each(function() {
+      $(".grid").masonry('appended', $(this).get(0));
+    });
+
+    $(gridItems).imagesLoaded().always(function() {
+      $(".grid").masonry("layout");
+
+      $(gridItems).each(function() {
+        $(this).removeClass("not-loaded");
+      });
+    });
+  }
+
+  $(gridItems).each(function() {
+    observer.observe($(this).get(0));
+  });
 }
 
-renderMedia("#lightgallery", 50, 0);
+renderMedia("#lightgallery", 30, 0);
 
 $("#lightgallery").on('onBeforeSlide.lg',function(event, prevIndex, index, fromTouch, fromThumb) {
   var currentSlide = $("#lightgallery .grid-item").eq(index);
@@ -52,13 +92,14 @@ $("#lightgallery").on('onBeforeSlide.lg',function(event, prevIndex, index, fromT
   $('.lg-toolbar').append(`<a target="_blank" class="lg-icon" href="${jumpUrl}"><i class="fab fa-discord"></i></a>`);
 });
 
-var cur = 51;
+var renderedImageCount = 31;
 $(window).scroll(function() {
   var position = Math.round($(window).scrollTop());
   var bottom = $(document).height() - $(window).height();
+  var browserHeight = $(window).height();
 
-  if((position + 500) >= bottom) {
-    renderMedia(".grid", 20, cur);
+  if((position + browserHeight) >= bottom) {
+    renderMedia("#lightgallery", 10, renderedImageCount, false);
 
     $(".grid").data("lightGallery").destroy(true);
     $(".grid").lightGallery({
@@ -69,8 +110,7 @@ $(window).scroll(function() {
       "enableDrag": false,
       "enableSwipe": false
     });
-    $(".grid").packery();
 
-    cur = cur + 20;
+    renderedImageCount = renderedImageCount + 10;
   }
 });

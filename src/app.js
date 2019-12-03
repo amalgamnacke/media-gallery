@@ -1,18 +1,11 @@
 require('bootstrap');
-//require('masonry-layout/dist/masonry.pkgd.min');
 require('lightgallery');
 require('lg-zoom');
 require('lg-video');
 require('lg-fullscreen');
 require('lg-hash');
 
-//require('isotope-layout');
-//require('isotope-packery');
-
-
-require("isotope-layout/dist/isotope.pkgd.min");
-require('isotope-packery/packery-mode');
-require('packery');
+require("masonry-layout/dist/masonry.pkgd.min");
 require('imagesloaded');
 
 const eva = require('eva-icons');
@@ -30,35 +23,12 @@ $(document).ready(function() {
     "enableSwipe": false
   });
 
-  // init Packery
-  $('.grid').packery({
-    itemSelector: '.grid-item',
-    gutter: 7,
-    percentPosition: true
-  });
-  // layout Packery after each image loads
-  $(".grid").imagesLoaded().progress(function() {
-    console.log("image loaded!");
-    $(".grid").packery();
-
-
+  $(".grid").imagesLoaded().always(function() {
+    $('.grid').masonry({
+      itemSelector: ".grid-item",
+      resize: true,
+      gutter: 10,
+      transitionDuration: 0
+    });
   });
 });
-
-// Load the gallery.
-/*require(['lightgallery.js'], function() {
-  lightGallery(document.getElementById('lightgallery'), {
-    thumbnail: true,
-    useCSS: true
-  });
-});*/
-
-
-
-/*require(['masonry-layout'], function($) {
-  $('#lightgallery').masonry({
-    // options...
-    itemSelector: '.item',
-    columnWidth: 200
-  });
-});*/
