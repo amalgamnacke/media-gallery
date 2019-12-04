@@ -15,12 +15,25 @@ let observer = new IntersectionObserver(function(entries, self) {
 }, config);
 
 
+function kek() {
+  var filteredJson = {};
+
+  for (var messageId of Object.keys(discordJson)) {
+    var message = discordJson[messageId];
+
+    if (message.author === "masserbart") {
+      filteredJson[messageId] = message;
+    }
+  }
+
+  return filteredJson;
+}
 function renderMedia(containerSelector, amount, offset, isInitialCall = true) {
   var renderedImageCount = 0;
   var container = $(containerSelector);
   var gridItems = [];
 
-  for (var messageId of Object.keys(discordJson).slice(offset)) {
+  for (var messageId of Object.keys(kek()).slice(offset)) {
     if (renderedImageCount >= amount) {
       break;
     }

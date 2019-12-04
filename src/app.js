@@ -1,28 +1,28 @@
+// Load libs.
 require('bootstrap');
 require('lightgallery');
 require('lg-zoom');
 require('lg-video');
 require('lg-fullscreen');
-require('lg-hash');
-
 require("masonry-layout/dist/masonry.pkgd.min");
 require('imagesloaded');
+require('eva-icons');
 
-const eva = require('eva-icons');
-
+// Load local js.
 require('./discord-data');
+
+// Load local css.
 require('./scss/app.scss');
 
 $(document).ready(function() {
   $("#lightgallery").lightGallery({
     "selector": ".grid-item",
     "counter": false,
-
     "controls": false,
     "enableDrag": false,
     "enableSwipe": false
   });
-
+  
   $(".grid").imagesLoaded().always(function() {
     $('.grid').masonry({
       itemSelector: ".grid-item",
